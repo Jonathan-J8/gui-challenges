@@ -1,13 +1,37 @@
 @layer demo {
-  @media (prefers-reduced-motion: no-preference) {
-    button {
-      view-transition-name: buy-btn;
-    }
-    
-    ::view-transition-old(buy-btn),
-    ::view-transition-new(buy-btn) {
-      height: 100%;
-      width: 100%;
-    }
+  #btn1 {
+    border-radius: 50px;
+  }
+
+  #btn2 {
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #container {
+    view-transition-name: buy-btn;
+    outline: solid 1px red;
+    outline-offset: 3px;
+    min-width: 30px;
+    min-height: 30px;
+    width: auto;
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    padding: 10px;
+  }
+  #container::before {
+    content: "morph ";
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateY(-110%);
+  }
+
+  ::view-transition-old(buy-btn),
+  ::view-transition-new(buy-btn) {
+    /* width: 100%; */
+    height: 100%;
   }
 }

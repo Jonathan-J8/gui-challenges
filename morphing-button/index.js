@@ -1,21 +1,30 @@
-const spinner = '<svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24"><use href="#icon.spinner"></use></svg>'
+const id = setInterval(() => {
+  setState();
+}, 2000);
 
-const states = {
-  idle: 'Do some hard work',
-  sending: `${spinner} working...`,
-  done: 'Done!',
-}
+document.body.onclick = () => {
+  clearInterval(id);
+  setState();
+};
 
-demo.onclick = () => {
-  setState('sending')
-  setTimeout(() => setState('done'), 4000)
-  setTimeout(() => setState('idle'), 6000)
-}
+let toggled = false;
+const toggle = () => {
+  if (toggled) {
+    container.appendChild(btn2);
+    if (container.contains(btn1)) document.body.appendChild(btn1);
+  } else {
+    container.appendChild(btn1);
+    if (container.contains(btn2)) document.body.appendChild(btn2);
+  }
+  toggled = !toggled;
+};
 
-function setState(state) {
-  if (!document.startViewTransition)
-    demo.innerHTML = states[state]
-  else
-    document.startViewTransition(() => 
-      demo.innerHTML = states[state])
+function setState() {
+  if (!document.startViewTransition) {
+    toggle();
+  } else {
+    document.startViewTransition(() => {
+      toggle();
+    });
+  }
 }
